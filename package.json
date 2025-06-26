@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.23.0",
+    "@clerk/themes": "^2.2.52",
     "@uploadthing/react": "^7.3.2",
     "mongoose": "^8.16.0",
     "next": "15.3.4",
