@@ -1,11 +1,6 @@
-import { authMiddleware } from '@clerk/nextjs'
+import { clerkMiddleware } from '@clerk/nextjs/server'
 
-export default authMiddleware({
-  // Routes accessible without authentication
-  publicRoutes: ['/api/webhook/clerk'],
-  // Routes completely ignored by middleware
-  ignoredRoutes: ['/api/webhook/clerk']
-})
+export default clerkMiddleware()
 
 export const config = {
   matcher: [
