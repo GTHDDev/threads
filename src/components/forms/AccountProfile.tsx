@@ -10,6 +10,8 @@ import { useState, type ChangeEvent } from 'react'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
 import { Input } from '../ui/input'
+import { isBase64Image } from '@/lib/utils'
+import { useUploadThing } from '@/lib/uploadthing'
 
 interface Props {
   user: {
@@ -24,6 +26,10 @@ interface Props {
 }
 
 const AccountProfile = ({ user, btnTitle }: Props) => {
+  const { startUpload } = useUploadThing('media')
+
+  const [files, setFiles] = useState<File[]>([])
+
   const form = useForm<z.infer<typeof UserValidation>>({
     resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -34,10 +40,20 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     }
   })
 
-  const [files, setFiles] = useState<File[]>([])
+  const onSubmit = async (values: z.infer<typeof UserValidation>) => {
+    const blob = values.profile_photo
 
-  const onSubmit = (values: z.infer<typeof UserValidation>) => {
-    console.log('Do something')
+    const hasImageChanged = isBase64Image(blob)
+
+    if (hasImageChanged) {
+      const imgRes = await startUpload(files)
+
+      if (imgRes?.[0].fileUrl) {
+        values.profile_photo = imgRes[0].fileUrl
+      }
+    }
+
+    // TODO: update user profile logic here
   }
 
   const handleImage = (
