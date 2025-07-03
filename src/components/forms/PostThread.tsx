@@ -8,6 +8,7 @@ import { ThreadValidation } from '@/lib/validations/thread'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 interface PostThreadProps {
   userId: string

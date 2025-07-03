@@ -15,20 +15,20 @@ interface UserUpdateParams {
   path: string
 }
 
-export async function fetchUser (userId: string) {
+export async function fetchUser(userId: string) {
   try {
     connectToDB()
 
-    return await User.findOne({ id: userId }.populate({
+    return await User.findOne({ id: userId }).populate({
       path: 'communities',
       model: Community
-    }))
+    })
   } catch (error: any) {
     throw new Error(`Failed to fetch user: ${error.message}`)
   }
 }
 
-export async function updateUser ({
+export async function updateUser({
   userId,
   bio,
   name,
