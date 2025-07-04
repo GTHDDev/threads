@@ -10,7 +10,8 @@ import { fetchThreadById } from '@/lib/actions/thread.actions'
 export const revalidate = 0
 
 async function page ({ params }: { params: { id: string } }) {
-  if (!params.id) return null
+  const { id } = await params
+  if (!id) return null
 
   const user = await currentUser()
   if (!user) return null
@@ -18,7 +19,7 @@ async function page ({ params }: { params: { id: string } }) {
   const userInfo = await fetchUser(user.id)
   if (!userInfo?.onboarded) redirect('/onboarding')
 
-  const thread = await fetchThreadById(params.id)
+  const thread = await fetchThreadById(id)
 
   return (
     <section className='relative'>
@@ -37,7 +38,7 @@ async function page ({ params }: { params: { id: string } }) {
 
       <div className='mt-7'>
         <Comment
-          threadId={params.id}
+          threadId={id}
           currentUserImg={user.imageUrl}
           currentUserId={JSON.stringify(userInfo._id)}
         />
