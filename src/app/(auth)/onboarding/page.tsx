@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { fetchUser } from '@/lib/actions/user.actions'
 import AccountProfile from '@/components/forms/AccountProfile'
+import { currentUser } from '@clerk/nextjs/server'
 
 async function Page () {
   const user = await currentUser()

@@ -5,7 +5,7 @@ import { fetchUser } from '@/lib/actions/user.actions'
 import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 
-export default async function Home({
+export default async function Home ({
   searchParams
 }: {
   searchParams: Promise<Record<string, string | undefined>>
@@ -51,7 +51,7 @@ export default async function Home({
 
       <Pagination
         path='/'
-        pageNumber={(((resolvedSearchParams?.page) ?? '').length > 0) ? +resolvedSearchParams.page : 1}
+        pageNumber={(((searchParams?.page) ?? '').length > 0) ? +searchParams.page : 1}
         isNext={result.isNext}
       />
     </>
