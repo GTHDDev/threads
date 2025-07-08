@@ -5,7 +5,7 @@ import Thread from '../models/thread.model'
 import User from '../models/user.model'
 import { connectToDB } from '../mongoose'
 
-export async function fetchCommunityPosts (id: string) {
+export async function fetchCommunityPosts(id: string) {
   try {
     connectToDB()
 

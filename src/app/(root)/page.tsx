@@ -5,20 +5,19 @@ import { fetchUser } from '@/lib/actions/user.actions'
 import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 
-export default async function Home ({
+export default async function Home({
   searchParams
 }: {
   searchParams: Promise<Record<string, string | undefined>>
 }) {
   const user = await currentUser()
-  if (user === null) return null
+  if (!user) return null
 
   const userInfo = await fetchUser(user.id)
   if (!userInfo?.onboarded) redirect('/onboarding')
 
-  const resolvedSearchParams = await searchParams
   const result = await fetchPosts(
-    resolvedSearchParams.page ? +resolvedSearchParams.page : 1,
+    searchParams.page ? +searchParams.page : 1,
     30
   )
 
@@ -30,7 +29,7 @@ export default async function Home ({
         {result.posts.length === 0
           ? (
             <p className='no-result'>Create the first thread!</p>
-            )
+          )
           : (
             <>
               {result.posts.map((post) => (
@@ -47,7 +46,7 @@ export default async function Home ({
                 />
               ))}
             </>
-            )}
+          )}
       </section>
 
       <Pagination
