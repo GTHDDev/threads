@@ -16,8 +16,10 @@ export default async function Home ({
   const userInfo = await fetchUser(user.id)
   if (!userInfo?.onboarded) redirect('/onboarding')
 
+  const resolvedSearchParams = await searchParams
+
   const result = await fetchPosts(
-    searchParams.page ? +searchParams.page : 1,
+    resolvedSearchParams.page ? +resolvedSearchParams.page : 1,
     30
   )
 
@@ -51,7 +53,7 @@ export default async function Home ({
 
       <Pagination
         path='/'
-        pageNumber={(((searchParams?.page) ?? '').length > 0) ? +searchParams.page : 1}
+        pageNumber={(((resolvedSearchParams?.page) ?? '').length > 0) ? +resolvedSearchParams.page : 1}
         isNext={result.isNext}
       />
     </>
