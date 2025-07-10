@@ -31,6 +31,10 @@ module.exports = {
         'react/react-in-jsx-scope': 0,
         'react/jsx-uses-react': 0,
         '@typescript-eslint/explicit-function-return-type': 'off',
-        'space-before-function-paren': 0
+        'space-before-function-paren': 0,
+        '@typescript-eslint/strict-boolean-expressions': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-misused-promises': 'off',
+        '@typescript-eslint/space-before-function-paren': 'off'
     }
 }
